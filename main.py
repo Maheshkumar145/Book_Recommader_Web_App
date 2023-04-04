@@ -4,6 +4,8 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import pickle
+import sys
+#print(sys.path)
 
 closest_book_index = pickle.load(open('closest_book_index.pkl','rb'))
 filtered_books= pickle.load(open('filtered_books.pkl','rb'))
