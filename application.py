@@ -15,7 +15,7 @@ similarity_scores= pickle.load(open('similarity_scores.pkl','rb'))
 books= pickle.load(open('books.pkl','rb'))
 
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 # Load data
 books = pd.read_csv('books_new.csv')
@@ -43,18 +43,18 @@ feature_vectors = vectorizer.fit_transform(combined_features)
 # Compute similarity scores
 similarity_scores = cosine_similarity(feature_vectors)
 #print("Shape of similarity scores:", similarity_scores.shape)
-@app.route('/')
+@application.route('/')
 def home():
 # Render home page with all books
     return render_template('home.html', books=books.to_dict('records'))
 
 
 
-@app.route('/recommend')
+@application.route('/recommend')
 def recommend_ui():
     return render_template('recommend.html',recommended_books=recommended_books)
 
-@app.route('/recommend_books',methods=['post'])
+@application.route('/recommend_books',methods=['post'])
 def recommend():
     user_input = request.form.get('user_input')
     subgenre = request.form.get('subgenre')
@@ -89,6 +89,7 @@ def recommend():
     return recommended_books
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
+
 
 
